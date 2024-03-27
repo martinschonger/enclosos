@@ -15,7 +15,6 @@ weight_in_poly = 1;
 weight_not_in_poly = 8;
 include_ref_data_points = true;
 include_poly_points = true;
-precision = 16;
 
 % fixed params (for now):
 dim = 2;
