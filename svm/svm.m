@@ -12,6 +12,8 @@ end
 
 dim = 2; % hardcoded for now
 
+% samples_tmp = samples + (1e-4 * randn(size(samples)));
+
 % SVMModel = fitcsvm(samples, labels)
 % SVMModel = fitcsvm(samples, labels, 'kernelfunction', 'polynomial', 'polynomialorder', 4, 'BoxConstraint', 100, 'weights', weights, 'OptimizeHyperparameters', 'auto')
 % SVMModel = fitcsvm(samples, labels, 'kernelfunction', 'polynomial', 'polynomialorder', 4, 'standardize', true, 'weights', weights) % might work well, but could not get the reconstruction working
