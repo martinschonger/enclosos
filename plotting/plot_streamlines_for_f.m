@@ -1,4 +1,4 @@
-% Copyright © 2023 Martin Schonger
+% Copyright © 2024 Martin Schonger
 % This software is licensed under the GPLv3.
 
 

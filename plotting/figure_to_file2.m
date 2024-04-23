@@ -1,3 +1,7 @@
+% Copyright © 2024 Martin Schonger
+% This software is licensed under the GPLv3.
+
+
 function figure_to_file2(fig, filepath, args)
 
 arguments

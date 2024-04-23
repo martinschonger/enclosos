@@ -1,14 +1,12 @@
+% Copyright © 2024 Martin Schonger
+% This software is licensed under the GPLv3.
+
+
 if ~exist('setup_figure2')
     addpath("plotting");
 end
 
 [fig, UIAxes] = setup_figure2(2*3.41275152778, 2*3.41275152778, true);
-clc
-% set(0,'defaulttextinterpreter','latex')
-% set(0,'DefaultTextFontSize', 10)
-% set(0,'DefaultTextFontname', 'CMU Serif')
-% set(0,'DefaultAxesFontSize', 10)
-% set(0,'DefaultAxesFontName','CMU Serif')
 
 hold(UIAxes, 'on');
 
@@ -233,7 +231,7 @@ unsafe_set{1} = dot(unsafe_set_coefs, unsafe_set_monomials);
 plot_dim1 = 1;
 plot_dim2 = 2;
 
-% [fig, ax] = setup_figure2(3.41275152778, 3.41275152778, false);
+
 fontsize(fig, 7, "points");
 box on;
 xlh = xlabel(strcat('$\xi_', int2str(plot_dim2), '$'), 'interpreter','latex');
@@ -301,35 +299,11 @@ if options.enable_barrier
 end
 
 
-
 uistack(plt_pgon1, 'top');
-
-
-
-% % actual trajectories based on executing the DS on the robot
-% sim_path = sim_id;
-% [Data3, Target3, indivTrajStartIndices3, timestamps3] = recorded_trajectories_to_refdata({sim_path}, 0, "eval");
-% M3 = 2;
-% shift3 = shift;
-% Data3(1:M3, :) = Data3(1:M3, :) - shift3;
-% Target3 = Target3 - shift3;
-% rd3 = RefData;
-% rd3.directInit(Data3, Target3, indivTrajStartIndices3, timestamps3, true, rd.state_maxnorm, rd.vel_maxnorm);
-% 
-% % generate sample trajectories
-% initial_set_center_est = rd3.xi0_mean;
-% 
-% rd_est = RefData;
-% [Data_est, Target_est, indivTrajStartIndices_est, Timestamps_est] = generateRefData(f, initial_set_center_est);
-% rd_est.directInit(Data_est, Target_est, indivTrajStartIndices_est, Timestamps_est, false);
-% plt_sampled_traj = rd_est.plotLines(plot_dim1, plot_dim2, {'markeredgecolor', 'none', 'markerfacecolor', 'none', 'handlevisibility', 'off'}, {'color', '#ff00ff', 'linewidth', 1.5, 'displayname', 'Generated traj. $\xi^{\mathrm{gen}}$'});
-
-% rd3.plotLines(1, 2, {'markeredgecolor', 'none', 'markerfacecolor', 'none', 'handlevisibility', 'off'}, {'color', '#3392ff', 'linewidth', 1, 'displayname', 'Actual traj. $\xi^{\mathrm{actual}}$'});
 
 
 leg = findobj(fig, 'Type', 'Legend');
 leg.ItemTokenSize(1) = 5;
-
 
 
 %%

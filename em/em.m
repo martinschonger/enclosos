@@ -25,7 +25,6 @@ Ms = (1/length(samples))*Ms;
 level = nchoosek(args.ambi_dim + args.deg, args.deg);
 Qd = v'*inv(Ms)*v - level - args.delta; 
 Qd_fun = yalmip2matlabFun('Qd');
-% fimplicit(Qd_fun)
 
 x = vpa(sym('x', [2; 1], 'real'), 16);
 res = Qd_fun(x(1), x(2));

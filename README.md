@@ -25,6 +25,8 @@ Install the MathWorks toolboxes
 [Statistics and Machine Learning Toolbox](https://www.mathworks.com/products/statistics.html), and
 [Symbolic Math Toolbox](https://www.mathworks.com/products/symbolic.html).
 
+Install the third party tool [YALMIP](https://yalmip.github.io/).
+
 ### Usage
 Run `enclosos.mlapp`.
 
@@ -33,6 +35,8 @@ Configure the parameters via the GUI as desired, hit the "compute" button, and c
 Optionally, make adjustments and recompute as needed.
 
 Optionally, save the computed polynomial to an m-file.
+
+(Optionally, recreate the shown u-shaped semi-algebraic set by using the settings from `ushape_settings.txt`.)
 
 ### Contact
 martin.schonger@tum.de
