@@ -2,8 +2,8 @@ if ~exist('setup_figure2')
     addpath("plotting");
 end
 
-[fig, UIAxes] = setup_figure2(3.41275152778, 3.41275152778, true);
-
+[fig, UIAxes] = setup_figure2(2*3.41275152778, 2*3.41275152778, true);
+clc
 % set(0,'defaulttextinterpreter','latex')
 % set(0,'DefaultTextFontSize', 10)
 % set(0,'DefaultTextFontname', 'CMU Serif')
@@ -23,7 +23,7 @@ ref_data = readmatrix('tmp_refdata.txt');
 xlimits = UIAxes.XLim;
 ylimits = UIAxes.YLim;
 
-ref_data_scatter = scatter(UIAxes, ref_data(:, 1), ref_data(:, 2), 1, 'black');
+ref_data_scatter = scatter(UIAxes, ref_data(:, 1), ref_data(:, 2), 1, 'black', 'HandleVisibility', 'off');
 
 
 polygons_tmp = {};
@@ -32,9 +32,67 @@ polygons_tmp{end+1} = [0.8039,-0.1370;0.8039,-0.0390;0.2169,-0.0390;0.2169,-0.13
 polygons_tmp{end+1} = [0.2915,-0.1370;0.2915,0.3049;0.2169,0.3049;0.2169,-0.1370];
 polygons = {};
 for i = 1:length(polygons_tmp)
-    polygons{end+1} = drawpolygon(UIAxes, 'color', 'black', 'FaceAlpha', 0.25, 'Position', polygons_tmp{i});
+    polygons{end+1} = drawpolygon(UIAxes, 'color', 'black', 'FaceAlpha', 0, 'EdgeAlpha', 0, 'Position', polygons_tmp{i});
     polygons{end}.Color = 'black';
+
+    pgon = polyshape(polygons_tmp{i}(:,1), polygons_tmp{i}(:,2));
+    tmp_pgon_3 = plot(pgon, 'EdgeColor', 'black', 'FaceColor', 'black', 'FaceAlpha', 0, 'LineWidth', 2, 'displayname', 'Polygon for encloSOS');
+    if i > 1
+        set(tmp_pgon_3, 'handlevisibility', 'off');
+    end
 end
+
+
+
+
+P2 = [[14.75; 0], [14.75; 27.9], [13.4; 27.9], [13.4; 0]];
+P3 = [[14.75; 0], [14.75; 2.3], [-14.75; 2.3], [-14.75; 0]];
+P4 = [[-13.4; 0], [-13.4; 27.9], [-14.75; 27.9], [-14.75; 0]];
+
+offset_vect_x3 = [5; 0];
+P2 = P2 + offset_vect_x3;
+offset_vect_x4 = [1, 1, -1, -1] .* offset_vect_x3;
+P3 = P3 + offset_vect_x4;
+P4 = P4 - offset_vect_x3;
+
+
+translation_vect = [38; -5.2];  % large box
+P2 = P2 + translation_vect;
+P3 = P3 + translation_vect;
+P4 = P4 + translation_vect;
+
+% convert to meters
+P2 = P2 ./ 100;
+P3 = P3 ./ 100;
+P4 = P4 ./ 100;
+
+obstacle_expansion_fact = 0.0; % meters
+offset_vect_x = [1, 1, -1, -1] * obstacle_expansion_fact;
+offset_vect_y = [-1, 0, 0, -1] * 0.0;
+offset_vect = [offset_vect_x; offset_vect_y];
+
+P2 = P2 + offset_vect;
+P3 = P3 + offset_vect;
+P4 = P4 + offset_vect;
+
+P5 = [P2(:, 1:3), [P2(1, 4); P2(2, 4) + 0.023], [P4(1, 1); P4(2, 1) + 0.023], P4(:, 2:4)];
+
+obstacle_polygon_cellarr = {};
+obstacle_polygon_cellarr{1} = P5;
+
+pgon = {};
+for pi = 1:length(obstacle_polygon_cellarr)
+    pgon_tmp= obstacle_polygon_cellarr{pi};
+    pgon_tmp = pgon_tmp ./ rd.state_maxnorm;
+    pgon{pi} = polyshape(pgon_tmp(1,:), pgon_tmp(2,:));
+end
+for pi = 1:length(pgon)
+    plt_pgon1 = plot(pgon{pi}, 'linewidth', 2, 'linestyle', ':', 'edgecolor', 'yellow', 'facecolor', 'yellow', 'facealpha', 0, 'displayname', 'Obstacle');
+    % set(plt_pgon1, 'handlevisibility', 'off');
+end
+
+
+
 
 xlim(UIAxes, xlimits);
 ylim(UIAxes, ylimits);
@@ -99,7 +157,7 @@ if include_poly_points
     end
 end
 
-samples_scatter = scatter(UIAxes, samples(:, 1), samples(:, 2), labels+2, 'blue');
+samples_scatter = scatter(UIAxes, samples(:, 1), samples(:, 2), labels+2, 'blue', 'displayname', 'Sample points');
 
 load_from_file = true;
 if load_from_file
@@ -129,44 +187,9 @@ end
 
 disp(['p(x1, x2) = ' char(p)]);
 
-levelcurve_line = fimplicit(UIAxes, formula(p), [xlimits, ylimits], 'color', 'red', 'linewidth', 2, 'HandleVisibility', 'off');
+% levelcurve_line = fimplicit(UIAxes, formula(p), [xlimits, ylimits], 'color', 'red', 'linewidth', 2, 'HandleVisibility', 'off');
 
 %%
-P2 = [[14.75; 0], [14.75; 27.9], [13.4; 27.9], [13.4; 0]];
-P3 = [[14.75; 0], [14.75; 2.3], [-14.75; 2.3], [-14.75; 0]];
-P4 = [[-13.4; 0], [-13.4; 27.9], [-14.75; 27.9], [-14.75; 0]];
-
-offset_vect_x3 = [5; 0];
-P2 = P2 + offset_vect_x3;
-offset_vect_x4 = [1, 1, -1, -1] .* offset_vect_x3;
-P3 = P3 + offset_vect_x4;
-P4 = P4 - offset_vect_x3;
-
-
-translation_vect = [38; -5.2];  % large box
-P2 = P2 + translation_vect;
-P3 = P3 + translation_vect;P4 = P4 + translation_vect;
-
-% convert to meters
-P2 = P2 ./ 100;
-P3 = P3 ./ 100;
-P4 = P4 ./ 100;
-
-obstacle_expansion_fact = 0.0; % meters
-offset_vect_x = [1, 1, -1, -1] * obstacle_expansion_fact;
-offset_vect_y = [-1, 0, 0, -1] * 0.0;
-offset_vect = [offset_vect_x; offset_vect_y];
-
-P2 = P2 + offset_vect;
-P3 = P3 + offset_vect;
-P4 = P4 + offset_vect;
-
-P5 = [P2(:, 1:3), [P2(1, 4); P2(2, 4) + 0.023], [P4(1, 1); P4(2, 1) + 0.023], P4(:, 2:4)];
-
-obstacle_polygon_cellarr = {};
-obstacle_polygon_cellarr{1} = P5;
-
-
 [options, result, f, V, B] = read_exp('plotting/2023-09-28_033613');
 
 exp_list = options.dataset_opts.exp_list;
@@ -278,6 +301,11 @@ if options.enable_barrier
 end
 
 
+
+uistack(plt_pgon1, 'top');
+
+
+
 % % actual trajectories based on executing the DS on the robot
 % sim_path = sim_id;
 % [Data3, Target3, indivTrajStartIndices3, timestamps3] = recorded_trajectories_to_refdata({sim_path}, 0, "eval");
@@ -307,5 +335,6 @@ leg.ItemTokenSize(1) = 5;
 %%
 plot_id = 'showcase';
 output_root_path = 'output/';
-figure_to_file2(fig, fullfile(output_root_path, plot_id), format='-dpdf');
+% figure_to_file2(fig, fullfile(output_root_path, plot_id), format='-dpdf');
+figure_to_file2(fig, fullfile(output_root_path, plot_id), format='-dpng');
 close(fig);
