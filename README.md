@@ -11,7 +11,8 @@ and Sami Haddadin<sup>1</sup>, which has been submitted to the FMR workshop at I
 <sup>2</sup>Learning Algorithms and Systems Laboratory (LASA), École Polytechnique Fédérale de Lausanne (EPFL), Switzerland.
 
 ### Demo
-![Demo](/enclosos.mp4)
+
+https://raw.githubusercontent.com/martinschonger/enclosos/main/enclosos.mp4
 
 ### Setup
 Install MATLAB (tested with R2023a).
