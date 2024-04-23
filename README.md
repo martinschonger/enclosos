@@ -10,6 +10,8 @@ and Sami Haddadin<sup>1</sup>, which has been submitted to the FMR workshop at I
 <sup>1</sup>Munich Institute of Robotics and Machine Intelligence (MIRMI), Technical University of Munich (TUM), Germany. Abdalla Swikir is also with Omar Al-Mukhtar University (OMU), Albaida, Libya.
 <sup>2</sup>Learning Algorithms and Systems Laboratory (LASA), École Polytechnique Fédérale de Lausanne (EPFL), Switzerland.
 
+<p align="center"><img src="https://github.com/martinschonger/enclosos/assets/6695626/85c232b0-393d-4092-93c4-7b296a97fad3" width="700"></p>
+
 ### Demo
 
 https://github.com/martinschonger/enclosos/assets/6695626/3f0c01ba-8bc8-4562-a73a-1e031f07d72c
