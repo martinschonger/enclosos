@@ -12,7 +12,7 @@ and Sami Haddadin<sup>1</sup>, which has been submitted to the FMR workshop at I
 
 ### Demo
 
-https://raw.githubusercontent.com/martinschonger/enclosos/main/enclosos.mp4
+https://github.com/martinschonger/enclosos/assets/6695626/3f0c01ba-8bc8-4562-a73a-1e031f07d72c
 
 ### Setup
 Install MATLAB (tested with R2023a).
