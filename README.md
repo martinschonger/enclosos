@@ -1,16 +1,19 @@
-# encloSOS
+# EncloSOS
 
-Accompanying code for the workshop paper **EncloSOS: A MATLAB Toolbox for Computing Semi-Algebraic Enclosures** by
-Martin Schonger<sup>1</sup>,
-Hugo T. M. Kussaba<sup>1</sup>,
-Abdalla Swikir<sup>1</sup>,
-Aude Billard<sup>2</sup>,
-and Sami Haddadin<sup>1</sup>, which has been submitted to the FMR workshop at ICRA 2024 and is currently under review.
+Certificates are mathematical functions whose existence offers a formal guarantee for dynamical system properties. These certificates do not necessitate the explicit computation of system trajectories and, as such, provide a convenient way to ensure the reliability and trustworthiness of control systems. Among these certificates, the Lyapunov function is one of the most renowned examples: many works in the literature were devoted to the computational search of Lyapunov functions.
 
-<sup>1</sup>Munich Institute of Robotics and Machine Intelligence (MIRMI), Technical University of Munich (TUM), Germany. Abdalla Swikir is also with Omar Al-Mukhtar University (OMU), Albaida, Libya.
-<sup>2</sup>Learning Algorithms and Systems Laboratory (LASA), École Polytechnique Fédérale de Lausanne (EPFL), Switzerland.
+On the other hand, barrier certificates were introduced to ensure that the system will not enter undesirable or unsafe states.[^PJ:04] Finding barrier certificates is typically a challenging task, similar to the search for Lyapunov functions. Nevertheless, when dealing with polynomial dynamical systems and initial and unsafe sets defined as basic semialgebraic sets (defined by an intersection of polynomial inequalities), a feasible computational approach using sum-of-squares (SOS) is available.
+
+In the context of obstacle avoidance problems, an unsafe set contains the obstacle. In many real-world scenarios, however, these obstacles do not have a direct semialgebraic description but are typically represented as point clouds obtained by sampling. Thus, to formulate a SOS feasibility problem with these obstacles, one must find an adequate semialgebraic set over-approximating them. A common approach in the literature is to compute a minimal-volume ellipsoid containing the sampled points from the obstacle. However, this approach can be overly conservative and may limit its applicability for scenarios with more complex object shapes. For instance, in a pick-and-place task, a robot might need to pick up an object located at the bottom of a box without colliding with the edges of the box:[^SKCFSBH:24]
 
 <p align="center"><img src="https://github.com/martinschonger/enclosos/assets/6695626/85c232b0-393d-4092-93c4-7b296a97fad3" width="700"></p>
+
+To address these challenges, we propose **EncloSOS**, a MATLAB toolbox implementing various algorithms for computing semialgebraic enclosures in obstacle-rich environments.
+
+[^PJ:04]: 
+    Prajna, S., and Jadbabaie, A. "Safety verification of hybrid systems using barrier certificates." _International Workshop on Hybrid Systems: Computation and Control_. Berlin, Heidelberg: Springer Berlin Heidelberg, 2004.
+[^SKCFSBH:24]:
+    Schonger, M., Kussaba, H., Chen, L., Figueredo, L., Swikir, A., Billard, A., and Haddadin, S. "Learning Barrier-Certified Polynomial Dynamical Systems for Obstacle Avoidance with Robots." _Proceedings of the 41st IEEE International Conference on Robotics and Automation (ICRA)_, 2024.
 
 ### Demo
 
@@ -37,6 +40,17 @@ Optionally, make adjustments and recompute as needed.
 Optionally, save the computed polynomial to an m-file.
 
 (Optionally, recreate the shown u-shaped semi-algebraic set by using the settings from `ushape_settings.txt`.)
+
+### Citation
+
+```bibtex
+@Article{enclosos2024,
+  title = {{EncloSOS}: A {MATLAB} Toolbox for Computing Semi-Algebraic Enclosures},
+  author = {Schonger, Martin and Kussaba, Hugo Tadashi M. and Swikir, Abdalla and Billard, Aude and Haddadin, Sami},
+  journal = {Manuscript in preparation},
+  year = {2024},
+}
+```
 
 ### Contact
 martin.schonger@tum.de
