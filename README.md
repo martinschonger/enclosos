@@ -12,9 +12,9 @@ To address these challenges, we propose **EncloSOS**, a MATLAB toolbox implement
 
 ### Implemented algorithms
 
-* `SVM`: uses support vector machine with polynomial kernel.
-* `PSS`: approximate the samples using a polynomial super-level set proposed in [^DHL:17]. The MATLAB functions are based on the [original code](https://zenodo.org/record/6927946) by AmirHosein Sadeghimanesh.[^SE:17]
-* `EM`: uses the empirical-moment based approach proposed in [^PL:16].
+* `SVM`: Support Vector Machine with polynomial kernel.
+* `PSS`: Polynomial Super-level Set proposed in [^DHL:17]. The MATLAB functions in the folder `.\pss` are adapted (or directly) from the [code](https://zenodo.org/record/6927946) by AmirHosein Sadeghimanesh.[^SE:17]
+* `EM`: Empirical-Moment based approach proposed in [^PL:16].
  
 ### Demo
 
