@@ -10,11 +10,12 @@ In the context of obstacle avoidance problems, an unsafe set contains the obstac
 
 To address these challenges, we propose **EncloSOS**, a MATLAB toolbox implementing various algorithms for computing semialgebraic enclosures in obstacle-rich environments.
 
-[^PJ:04]: 
-    Prajna, S., and Jadbabaie, A. "Safety verification of hybrid systems using barrier certificates." _International Workshop on Hybrid Systems: Computation and Control_. Berlin, Heidelberg: Springer Berlin Heidelberg, 2004.
-[^SKCFSBH:24]:
-    Schonger, M., Kussaba, H., Chen, L., Figueredo, L., Swikir, A., Billard, A., and Haddadin, S. "Learning Barrier-Certified Polynomial Dynamical Systems for Obstacle Avoidance with Robots." _Proceedings of the 41st IEEE International Conference on Robotics and Automation (ICRA)_, 2024.
+### Implemented algorithms
 
+* `SVM`: uses support vector machine with polynomial kernel.
+* `PSS`: approximate the samples using a polynomial super-level set proposed in [^DHL:17]. The MATLAB functions are based on the [original code](https://zenodo.org/record/6927946) by AmirHosein Sadeghimanesh.[^SE:17]
+* `EM`: uses the empirical-moment based approach proposed in [^PL:16].
+ 
 ### Demo
 
 https://github.com/martinschonger/enclosos/assets/6695626/3f0c01ba-8bc8-4562-a73a-1e031f07d72c
@@ -39,7 +40,7 @@ Optionally, make adjustments and recompute as needed.
 
 Optionally, save the computed polynomial to an m-file.
 
-(Optionally, recreate the shown u-shaped semi-algebraic set by using the settings from `ushape_settings.txt`.)
+(Optionally, recreate the shown U-shaped semi-algebraic set by using the settings from `ushape_settings.txt`.)
 
 ### Citation
 
@@ -57,5 +58,19 @@ martin.schonger@tum.de
 
 This software was created as part of Martin Schonger's master's thesis in Computer Science at the Technical University of Munich's (TUM) School of Computation, Information and Technology (CIT).
 
-Copyright © 2024 Martin Schonger
+Copyright © 2024 Martin Schonger.
+
 This software is licensed under the GPLv3.
+
+### References
+
+[^PJ:04]: 
+    Prajna, S., and Jadbabaie, A. "Safety verification of hybrid systems using barrier certificates." _International Workshop on Hybrid Systems: Computation and Control_. Berlin, Heidelberg: Springer Berlin Heidelberg, 2004.
+[^SKCFSBH:24]:
+    Schonger, M., Kussaba, H., Chen, L., Figueredo, L., Swikir, A., Billard, A., and Haddadin, S. "Learning Barrier-Certified Polynomial Dynamical Systems for Obstacle Avoidance with Robots." _Proceedings of the 41st IEEE International Conference on Robotics and Automation (ICRA)_, 2024.
+[^DHL:17]:
+    Dabbene, F., Henrion, D., and Lagoa, C. M. (2017). Simple approximations of semialgebraic sets and their applications to control. _Automatica_, 78, 110-118.
+[^PL:16]:
+    Pauwels, E., and Lasserre, J. B. (2016). Sorting out typicality with the inverse moment matrix SOS polynomial. _Advances in Neural Information Processing Systems_, 29.
+[^SE:17]:
+    Sadeghimanesh, A., & England, M. (2022). Polynomial superlevel set representation of the multistationarity region of chemical reaction networks. _BMC bioinformatics_, 23(1), 391.
