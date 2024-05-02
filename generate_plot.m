@@ -42,6 +42,25 @@ end
 
 
 
+[options, result, f, V, B] = read_exp('plotting/2023-09-28_033613');
+
+exp_list = options.dataset_opts.exp_list;
+exp_list_cellarr = fileread(fullfile('c:/users/martin/dev/ds', exp_list, 'reference_trajectories.txt'));
+exp_list_cellarr = regexp(exp_list_cellarr, '\r\n|\r|\n', 'split');
+
+for i = 1:length(exp_list_cellarr)
+    exp_list_cellarr{i} = ['c:/users/martin/dev/ds/', exp_list_cellarr{i}];
+end
+
+[Data, Target, indivTrajStartIndices, timestamps] = recorded_trajectories_to_refdata(exp_list_cellarr, 100, "record", true);
+M = 2;
+shift = Target;
+Data(1:M, :) = Data(1:M, :) - shift;
+Target = [0; 0];
+rd = RefData;
+rd.directInit(Data, Target, indivTrajStartIndices, timestamps, true);
+
+
 
 P2 = [[14.75; 0], [14.75; 27.9], [13.4; 27.9], [13.4; 0]];
 P3 = [[14.75; 0], [14.75; 2.3], [-14.75; 2.3], [-14.75; 0]];
@@ -188,25 +207,6 @@ disp(['p(x1, x2) = ' char(p)]);
 % levelcurve_line = fimplicit(UIAxes, formula(p), [xlimits, ylimits], 'color', 'red', 'linewidth', 2, 'HandleVisibility', 'off');
 
 %%
-[options, result, f, V, B] = read_exp('plotting/2023-09-28_033613');
-
-exp_list = options.dataset_opts.exp_list;
-exp_list_cellarr = fileread(fullfile('c:/users/martin/dev/ds', exp_list, 'reference_trajectories.txt'));
-exp_list_cellarr = regexp(exp_list_cellarr, '\r\n|\r|\n', 'split');
-
-for i = 1:length(exp_list_cellarr)
-    exp_list_cellarr{i} = ['c:/users/martin/dev/ds/', exp_list_cellarr{i}];
-end
-
-[Data, Target, indivTrajStartIndices, timestamps] = recorded_trajectories_to_refdata(exp_list_cellarr, 100, "record", true);
-M = 2;
-shift = Target;
-Data(1:M, :) = Data(1:M, :) - shift;
-Target = [0; 0];
-rd = RefData;
-rd.directInit(Data, Target, indivTrajStartIndices, timestamps, true);
-
-
 initial_set_center = rd.xi0_mean;
 initial_set_radius = 0.05;
 
